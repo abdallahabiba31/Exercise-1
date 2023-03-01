@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.fhmdb;
 
+import at.ac.fhcampuswien.fhmdb.models.Genres;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import at.ac.fhcampuswien.fhmdb.ui.MovieCell;
 import com.jfoenix.controls.JFXButton;
@@ -45,6 +46,9 @@ public class HomeController implements Initializable {
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
+        genreComboBox.getItems().addAll(Genres.ACTION, Genres.DRAMA, Genres.ADVENTURE, Genres.ANIMATION, Genres.BIOGRAPHY,
+                Genres.COMEDY, Genres.CRIME, Genres.DOCUMENTARY, Genres.FAMILY, Genres.FANTASY, Genres.HISTORY, Genres.HORROR, Genres.MUSICAL,
+                Genres.MYSTERY, Genres.ROMANCE, Genres.SCIENCE_FICTION, Genres.WESTERN, Genres.WAR, Genres.SPORT, Genres.THRILLER);
 
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here

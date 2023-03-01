@@ -71,6 +71,12 @@ public class Movie {
         movies.add(new Movie("BEAU IS AFRAID",
                 "Ein Jahrzehnte umfassendes Porträt von einem der mächtigsten Unternehmer aller Zeiten.",
                 Arrays.asList(Genres.HORROR, Genres.MYSTERY, Genres.DRAMA, Genres.COMEDY)));
+        movies.add(new Movie("OPERATION FORTUNE: Ruse de guerre",
+                "Operation Fortune ist ein Agentenfilm von Guy Ritchie mit Jason Statham und Aubrey Plaza. In Guy Ritchies Operation Fortune schlüpft Jason Statham in die Rolle des MI6-Agenten Orson Fortune, der zusammen mit einem gefeierten Filmstar die Gefahr einer neuen Waffentechnologie bannen will.",
+                Arrays.asList(Genres.ACTION)));
+        movies.add(new Movie("SHOTGUN WEDDING - EIN KNALLHARTES TEAM",
+                "Shotgun Wedding - Ein knallhartes Team ist ein Actionfilm von Jason Moore mit Jennifer Lopez und Josh Duhamel. In der romantischen Actionkomödie Shotgun Wedding bekommen Jennifer Lopez und Josh Duhamel kalte Füße bei ihrer eigenen Hochzeit ... doch dann wird die gesamte Festgesellschaft zum Ziel einer Geiselnahme.",
+                Arrays.asList(Genres.ACTION, Genres.ROMANCE, Genres.COMEDY)));
         //Vorlage, um weitere Filme zu adden
         /*movies.add(new Movie("",
                 "",
