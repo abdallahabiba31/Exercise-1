@@ -17,6 +17,8 @@ import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
     @FXML
@@ -87,5 +89,14 @@ public class HomeController implements Initializable {
     }
 
     public void searchForMovies(ActionEvent actionEvent) {
+        /*for (int i = 0; i < observableMovies.stream().count() ; i++) {
+            observableMovies.stream().filter((Predicate<? super Movie>) genreComboBox.getValue()).collect(Collectors.toList());
+        }*/
+    }
+
+    public void filterMovies(ActionEvent actionEvent) {
+        /*for (int i = 0; i < observableMovies.stream().count() ; i++) {
+             observableMovies.stream().filter((Predicate<? super Movie>) genreComboBox.getValue()).collect(Collectors.toList());
+        }*/
     }
 }

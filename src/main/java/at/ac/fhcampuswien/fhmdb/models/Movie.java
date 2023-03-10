@@ -5,32 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Movie {
-    /*enum Genres{
-        ACTION,
-        ADVENTURE,
-        ANIMATION,
-        BIOGRAPHY,
-        COMEDY,
-        CRIME,
-        DRAMA,
-        DOCUMENTARY,
-        FAMILY,
-        FANTASY,
-        HISTORY,
-        HORROR,
-        MUSICAL,
-        MYSTERY,
-        ROMANCE,
-        SCIENCE_FICTION,
-        SPORT,
-        THRILLER,
-        WAR,
-        WESTERN
-    }*/
     private String title;
     private String description;
     // TODO add more properties here
-    public static List<Genres> genre = new ArrayList<>();
+    public List<Genres> genre;
 
     public Movie(String title, String description, List<Genres> genre) {
         this.title = title;
@@ -46,7 +24,7 @@ public class Movie {
         return description;
     }
 
-    public static List<Genres> getGenre() {
+    public List<Genres> getGenre() {
         return genre;
     }
 
@@ -68,7 +46,7 @@ public class Movie {
         movies.add(new Movie("JOHN WICK - KAPITEL 4",
                 "Im vierten Teil der Reihe nimmt es John Wick mit seinen bisher tödlichsten Widersachern auf. Während das Kopfgeld auf ihn immer höher wird, zieht Wick in einen weltweiten Kampf gegen die mächtigsten Akteure der Unterwelt - von New York über Paris und Osaka bis nach Berlin.",
                 Arrays.asList(Genres.ACTION, Genres.THRILLER, Genres.CRIME)));
-        movies.add(new Movie("BEAU IS AFRAID",
+        movies.add(new Movie("Beau is afraid",
                 "Ein Jahrzehnte umfassendes Porträt von einem der mächtigsten Unternehmer aller Zeiten.",
                 Arrays.asList(Genres.HORROR, Genres.MYSTERY, Genres.DRAMA, Genres.COMEDY)));
         movies.add(new Movie("OPERATION FORTUNE: Ruse de guerre",
