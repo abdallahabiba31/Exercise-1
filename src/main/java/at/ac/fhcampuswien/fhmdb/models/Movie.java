@@ -8,12 +8,26 @@ public class Movie {
     private String title;
     private String description;
     // TODO add more properties here
-    public List<Genres> genre;
+    private List<Genres> genre;
 
     public Movie(String title, String description, List<Genres> genre) {
         this.title = title;
         this.description = description;
         this.genre = genre;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        if(object == null){
+            return false;
+        }
+        if(object == this){
+            return true;
+        }
+        if(!(object instanceof Movie other)){
+            return false;
+        }
+        return this.title.equals(other.title) && this.description.equals(other.description) && this.genre.equals(other.genre);
     }
 
     public String getTitle() {

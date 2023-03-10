@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -69,6 +70,15 @@ public class HomeController implements Initializable {
                 // TODO sort observableMovies descending
                 sortBtn.setText("Sort (asc)");
             }
+        });
+        searchBtn.setOnAction(actionEvent -> {
+            Genres selectedGenre = (Genres) genreComboBox.getValue();
+
+
+            if (genreComboBox.getValue().equals(selectedGenre)) {
+                observableMovies.removeIf(movie -> !movie.getGenre().contains(selectedGenre));
+            }
+
         });*/
 
     }
@@ -90,23 +100,11 @@ public class HomeController implements Initializable {
 
     public void filterMovies(ActionEvent actionEvent) {
 
-        //gefilterte Liste aber falsch, weil so lösche ich genau die, die ich eigentlich haben
-        //möchte
         List<Movie> rem = observableMovies.stream()
                 .filter(q -> q.getGenre().contains(genreComboBox.getValue()))
                 .collect(Collectors.toList());
 
-        //observableMovies.removeAll(rem);
-
-
-
-        //System.out.println(genreComboBox.getValue());
-       /*System.out.println(observableMovies.stream()
-                .filter(q -> q.getGenre().contains(genreComboBox.getValue()))
-                .collect(Collectors.toList()));*/
-
-
-
+        observableMovies.removeIf(q -> !rem.contains(q));
 
     }
 }
