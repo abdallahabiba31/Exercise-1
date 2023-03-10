@@ -88,15 +88,25 @@ public class HomeController implements Initializable {
         }
     }
 
-    public void searchForMovies(ActionEvent actionEvent) {
-        /*for (int i = 0; i < observableMovies.stream().count() ; i++) {
-            observableMovies.stream().filter((Predicate<? super Movie>) genreComboBox.getValue()).collect(Collectors.toList());
-        }*/
-    }
-
     public void filterMovies(ActionEvent actionEvent) {
-        /*for (int i = 0; i < observableMovies.stream().count() ; i++) {
-             observableMovies.stream().filter((Predicate<? super Movie>) genreComboBox.getValue()).collect(Collectors.toList());
-        }*/
+
+        //gefilterte Liste aber falsch, weil so lösche ich genau die, die ich eigentlich haben
+        //möchte
+        List<Movie> rem = observableMovies.stream()
+                .filter(q -> q.getGenre().contains(genreComboBox.getValue()))
+                .collect(Collectors.toList());
+
+        //observableMovies.removeAll(rem);
+
+
+
+        //System.out.println(genreComboBox.getValue());
+       /*System.out.println(observableMovies.stream()
+                .filter(q -> q.getGenre().contains(genreComboBox.getValue()))
+                .collect(Collectors.toList()));*/
+
+
+
+
     }
 }
