@@ -8,11 +8,13 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -54,16 +56,36 @@ public class HomeController implements Initializable {
         // either set event handlers in the fxml file (onAction) or add them here
 
         // Sort button example:
-        sortBtn.setOnAction(actionEvent -> {
+        /*sortBtn.setOnAction(actionEvent -> {
             if(sortBtn.getText().equals("Sort (asc)")) {
                 // TODO sort observableMovies ascending
                 sortBtn.setText("Sort (desc)");
+                observableMovies.sort(Comparator.comparing(Movie::getTitle));
+                //sortState = SortState.ASCENDING;
+
             } else {
                 // TODO sort observableMovies descending
                 sortBtn.setText("Sort (asc)");
             }
-        });
+        });*/
 
+    }
 
+    public void sortMovies(ActionEvent actionEvent) {
+        if (sortBtn.getText().equals("Sort (asc)")) {
+            // TODO sort observableMovies ascending
+            sortBtn.setText("Sort (desc)");
+            observableMovies.sort(Comparator.comparing(Movie::getTitle));
+
+        } else {
+            // TODO sort observableMovies descending
+            sortBtn.setText("Sort (desc)");
+            observableMovies.sort(Comparator.comparing(Movie::getTitle).reversed());
+            sortBtn.setText("Sort (asc)");
+
+        }
+    }
+
+    public void searchForMovies(ActionEvent actionEvent) {
     }
 }
