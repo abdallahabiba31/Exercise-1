@@ -130,4 +130,13 @@ public class HomeController implements Initializable {
             observableMovies.removeIf(q -> !rem.contains(q));
         }
     }
+    public void clearFilter(ActionEvent actionEvent) {
+
+        //clear the combobox and then set the text of it
+        genreComboBox.getSelectionModel().clearSelection();
+        genreComboBox.setPromptText("Filter by Genre");
+        //showing all the movies
+        observableMovies.addAll(allMovies);
+
+}
 }
