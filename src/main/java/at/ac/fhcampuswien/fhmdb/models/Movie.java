@@ -15,7 +15,7 @@ public class Movie {
         this.description = description;
         this.genre = genre;
     }
-
+    //Ich weiß nicht genau, was das macht, aber hat der Tutor gezeigt gehabt
     @Override
     public boolean equals(Object object){
         if(object == null){

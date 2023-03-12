@@ -55,22 +55,27 @@ public class HomeController implements Initializable {
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
+        //probably they are more efficient ways to do this but :)
         genreComboBox.getItems().addAll(Genres.ACTION, Genres.DRAMA, Genres.ADVENTURE, Genres.ANIMATION, Genres.BIOGRAPHY,
                 Genres.COMEDY, Genres.CRIME, Genres.DOCUMENTARY, Genres.FAMILY, Genres.FANTASY, Genres.HISTORY, Genres.HORROR, Genres.MUSICAL,
                 Genres.MYSTERY, Genres.ROMANCE, Genres.SCIENCE_FICTION, Genres.WESTERN, Genres.WAR, Genres.SPORT, Genres.THRILLER);
 
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
+        // wanted to do this but don#t know how to test them
 
-        // Sort button example:
+        // Sort button
         sortBtn.setOnAction(actionEvent -> {
-                sortMovies(observableMovies, sortBtn.getText());
+            //call method
+            sortMovies(observableMovies, sortBtn.getText());
         });
+        //clear button
         clearBtn.setOnAction(actionEvent -> {
             clearFilter();
         });
-        //SEARCH BUTTON - ACTION EVENT
+        //search button
         searchBtn.setOnAction(actionEvent -> {
+            //cast genreComboBox or convert to string
             filterMoviesGenre(allMovies, (Genres) genreComboBox.getValue());
             filterMoviesSearchQuery(moviesByGenre, searchField.getText().toLowerCase());
             sortMovies(moviesByGenre,sortBtn.getText());
@@ -81,6 +86,8 @@ public class HomeController implements Initializable {
         if (sortBtnText.equals("Sort (asc)")) {
             // TODO sort observableMovies ascending
             sortBtn.setText("Sort (desc)");
+            //specifies that the items in the list should be sorted based on the title of the movie
+            //"Movie::getTitle" is a method that returns the title of the movie like a "shortcut"
             movies.sort(Comparator.comparing(Movie::getTitle));
 
         } else {
@@ -101,7 +108,8 @@ public class HomeController implements Initializable {
         searchField.clear();
     }
     public List<Movie> filterMoviesGenre(List<Movie> allMovies, Genres genreSelection) {
-        //clear list before adding the movies or else same movie will be added multiple times
+        //clear list before adding movies
+        //so that the movies won't be added multiple times
         moviesByGenre.clear();
 
         if (genreSelection != null) {
@@ -114,81 +122,42 @@ public class HomeController implements Initializable {
             }
             observableMovies.setAll(moviesByGenre);
         } else {
-            moviesByGenre.setAll(allMovies);// if "no filter" is selected, show all movies, moviesByGenre will be passed on to filterQuery
+            //if nothing is selected
+            //show all movies
+            moviesByGenre.setAll(allMovies);
         }
         return moviesByGenre;
     }
 
 
     public List<Movie> filterMoviesSearchQuery(List<Movie> moviesByGenre, String searchQuery) {
+
         ObservableList<Movie> movieList = FXCollections.observableArrayList();
-
         movieList.clear();
+        //searchField never empty so the if statement
+        if(searchQuery != " ") {
+            //go through already filtered (by genre) movies
+            for (Movie searchInMovies : moviesByGenre) {
+                //getting the titles and descriptions of the filtered movies
+                String title = searchInMovies.getTitle().toLowerCase();
+                String description = searchInMovies.getDescription().toLowerCase();
 
-        if(searchQuery != " ") {      //!searchQuery.isEmpty() replaced --> search field is never empty because of white space
-            for (Movie movieLoop : moviesByGenre) {     // loops the already filtered movie list (by genre) and adds the movies it finds there to the new movieList
-                String title = movieLoop.getTitle().toLowerCase();
-                String description = movieLoop.getDescription().toLowerCase();
 
-                // Check if the title or description of the movie  contains the search query
+                // Check if the title or description of the movie contains in the search query
                 if (title.contains(searchQuery) || description.contains(searchQuery)) {
-                    movieList.add(movieLoop);
+                    //if == yes --> adding them to the list
+                    movieList.add(searchInMovies);
                 }
-                // Set the observableMovies list to the filtered movieList
+                // Set the observableMovies list to the filtered list
                 observableMovies.setAll(movieList);
             }
         }
         return movieList;
     }
 
-    /*public List<Movie> filterMoviesGenre(List<Movie> allMovies, Genres genreSelection) {
-
-        //System.out.println(genreSelection);
-        //System.out.println(allMovies);
-        List<Movie> rem = allMovies.stream()
-                .filter(q -> q.getGenre().contains(genreSelection))
-                .collect(Collectors.toList());
-        //System.out.println(rem);
-
-        //removing the not filtered elements
-        //reverse system somehow
-        allMovies.removeIf(q -> !rem.contains(q));
-        //System.out.println(allMovies);
-
-        return allMovies;
-    }
-
-    public List<Movie> filterMoviesSearch(List<Movie> allMovies, String searchQuery) {
-
-        List<Movie> filteredMovies = new ArrayList<>();
-        String search = searchQuery.toLowerCase();
-
-        System.out.println(allMovies);
-        if (search != null) {
-            System.out.println(searchField.getText());
-
-            //check if search query not contains in the movie(title and description) and then remove this movie from the list
-            //allMovies.removeIf(x -> !x.getTitle().contains(search) && !x.getDescription().contains(search));
-            for (Movie movieLoop : allMovies) {     // loops the already filtered movie list (by genre) and adds the movies it finds there to the new movieList
-                String title = movieLoop.getTitle().toLowerCase();
-                String description = movieLoop.getDescription().toLowerCase();
-
-                // Check if the title or description of the movie  contains the search query
-                if (title.contains(searchQuery) || description.contains(searchQuery)) {
-                    filteredMovies.add(movieLoop);
-                }
-                // Set the observableMovies list to the filtered movieList
-                observableMovies.setAll(filteredMovies);
-            }
-            System.out.println(filteredMovies);
-            //return allMovies;
-        }
-        return observableMovies;
-
-    }*/
-
-
-
+    //the old how we wanted to do this
+    //tests hindered us
+    //had to
     /*public void filterMovies(ActionEvent actionEvent) {
 
         String search = searchField.getText().toLowerCase();
@@ -229,6 +198,5 @@ public class HomeController implements Initializable {
         //showing all the movies
         observableMovies.addAll(allMovies);
     }*/
-
 
 }
