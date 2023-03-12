@@ -77,8 +77,8 @@ public class HomeController implements Initializable {
         });
         //SEARCH BUTTON - ACTION EVENT
         searchBtn.setOnAction(actionEvent -> {
-            genreFilter(allMovies, genreComboBox.getValue() != null ? genreComboBox.getValue().toString() : "NO_FILTER");
-            searchQuery(moviesByGenre, searchField.getText().toLowerCase());
+            filterMoviesGenre(allMovies, (Genres) genreComboBox.getValue());
+            filterMoviesSearchQuery(moviesByGenre, searchField.getText().toLowerCase());
             sortMovies(moviesByGenre,sortBtn.getText());
         });
 
@@ -103,20 +103,19 @@ public class HomeController implements Initializable {
         genreComboBox.setPromptText("Filter by Genre");
 
         //showing all the movies
-        //observableMovies.addAll(allMovies);
         observableMovies.clear();
         observableMovies.setAll(allMovies);
         searchField.clear();
     }
-    public List<Movie> genreFilter(List<Movie> allMovies, String genreSelection) {
+    public List<Movie> filterMoviesGenre(List<Movie> allMovies, Genres genreSelection) {
         //clear list before adding the movies or else same movie will be added multiple times
         moviesByGenre.clear();
 
-        if (!genreSelection.equals("NO_FILTER")) {
+        if (genreSelection != null) {
             for (Movie movies : allMovies) {
                 List<Genres> genres = movies.getGenre();
 
-                if (genres.toString().contains(genreSelection)) {
+                if (genres.contains(genreSelection)) {
                     moviesByGenre.add(movies);
                 }
             }
@@ -128,12 +127,12 @@ public class HomeController implements Initializable {
     }
 
 
-    public List<Movie> searchQuery(List<Movie> moviesByGenre, String searchQuery) {
+    public List<Movie> filterMoviesSearchQuery(List<Movie> moviesByGenre, String searchQuery) {
         ObservableList<Movie> movieList = FXCollections.observableArrayList();
 
         movieList.clear();
 
-        if(!searchQuery.contains(" ")) {      //!searchQuery.isEmpty() replaced --> search field is never empty because of white space
+        if(searchQuery != " ") {      //!searchQuery.isEmpty() replaced --> search field is never empty because of white space
             for (Movie movieLoop : moviesByGenre) {     // loops the already filtered movie list (by genre) and adds the movies it finds there to the new movieList
                 String title = movieLoop.getTitle().toLowerCase();
                 String description = movieLoop.getDescription().toLowerCase();
