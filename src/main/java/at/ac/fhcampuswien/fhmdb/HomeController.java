@@ -64,14 +64,8 @@ public class HomeController implements Initializable {
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
-            sortMovies(observableMovies, sortBtn.getText());
+                sortMovies(observableMovies, sortBtn.getText());
         });
-        /*searchBtn.setOnAction(actionEvent -> {
-            filterMoviesGenre(allMovies, (Genres) genreComboBox.getValue());
-            filterMoviesSearch(moviesByGenre, searchField.getText().toLowerCase());
-            //sortMovies(moviesByGenre, sortBtn.getText());
-
-        });*/
         clearBtn.setOnAction(actionEvent -> {
             clearFilter();
         });
@@ -94,7 +88,6 @@ public class HomeController implements Initializable {
             sortBtn.setText("Sort (desc)");
             movies.sort(Comparator.comparing(Movie::getTitle).reversed());
             sortBtn.setText("Sort (asc)");
-
         }
     }
     public void clearFilter() {
