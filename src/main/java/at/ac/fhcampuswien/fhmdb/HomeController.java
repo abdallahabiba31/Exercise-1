@@ -100,11 +100,34 @@ public class HomeController implements Initializable {
 
     public void filterMovies(ActionEvent actionEvent) {
 
-        List<Movie> rem = observableMovies.stream()
-                .filter(q -> q.getGenre().contains(genreComboBox.getValue()))
-                .collect(Collectors.toList());
+        String search = searchField.getText().toLowerCase();
+        List<Movie> filteredMovies = new ArrayList<>();
 
-        observableMovies.removeIf(q -> !rem.contains(q));
+        if (searchField.getText() != null) {
+            //System.out.println(searchField.getText());
 
+            //check if search query not contains in the movie(title and description) and then remove this movie from the list
+            observableMovies.removeIf(x -> !x.getTitle().toLowerCase().contains(search) && !x.getDescription().toLowerCase().contains(search));
+
+            //another way to remove the movies
+            //for (Movie movies : allMovies) {
+            // if (observableMovies.removeIf(movie -> !movie.getTitle().toLowerCase().contains(search) && !movie.getDescription().toLowerCase().contains(search))) {
+            //filteredMovies.add(movies);
+            // }
+            // }
+
+            //to clear the input after filtering
+            searchField.clear();
+        }
+        if (genreComboBox.getValue() != null) {
+            //Creating list with the filtered genre movies
+            List<Movie> rem = observableMovies.stream()
+                    .filter(q -> q.getGenre().contains(genreComboBox.getValue()))
+                    .collect(Collectors.toList());
+
+            //removing the not filtered elements
+            //reverse system somehow
+            observableMovies.removeIf(q -> !rem.contains(q));
+        }
     }
 }
